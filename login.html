@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In | Muchale Number Garden</title>
+  <link rel="stylesheet" href="styles.css?v=11" />
+</head>
+<body class="auth-page">
+  <div class="background"></div>
+  <main class="auth-shell">
+    <section class="auth-card">
+      <a class="brand auth-brand" href="login.html"><span class="brand-mark">✦</span><span>Muchale Number Garden<small>Maths for curious minds</small></span></a>
+      <div class="auth-copy"><span class="page-kicker">Your learning garden</span><h1>Welcome back.</h1><p>Sign in to keep each learner's practice, stars, and progress in their own space.</p></div>
+
+      <div class="auth-tabs" role="tablist" aria-label="Account actions"><button class="auth-tab active" id="signInTab" type="button" role="tab" aria-selected="true">Sign in</button><button class="auth-tab" id="createTab" type="button" role="tab" aria-selected="false">Create account</button></div>
+      <p class="auth-message" id="authMessage" aria-live="polite"></p>
+
+      <form id="signInForm" class="auth-form">
+        <label>Email or username<input name="identifier" autocomplete="username" required placeholder="you@example.com" /></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" required placeholder="Your password" /></label>
+        <button class="auth-submit" type="submit">Enter the garden <span>→</span></button>
+      </form>
+
+      <form id="createForm" class="auth-form" hidden>
+        <label>Your name<input name="displayName" autocomplete="name" required minlength="2" placeholder="e.g. Sam" /></label>
+        <label>Email or username<input name="identifier" autocomplete="username" required minlength="3" placeholder="you@example.com" /></label>
+        <label>Password<input name="password" type="password" autocomplete="new-password" required minlength="6" placeholder="At least 6 characters" /></label>
+        <button class="auth-submit" type="submit">Create my garden <span>→</span></button>
+      </form>
+      <p class="auth-note">This starter version stores accounts only in this browser. A production release should connect this flow to a secure server and database.</p>
+    </section>
+  </main>
+  <script src="auth.js?v=1"></script>
+</body>
+</html>
