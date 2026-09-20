@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Progress | Muchale Number Garden</title>
+  <link rel="stylesheet" href="styles.css?v=10" />
+</head>
+<body>
+  <div class="background"></div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Muchale Number Garden home"><span class="brand-mark">✦</span><span>Muchale Number Garden<small>Maths for curious minds</small></span></a>
+    <button class="menu-toggle" type="button" aria-label="Open menu">☰</button>
+    <nav class="main-menu" aria-label="Main menu"><a href="index.html" class="menu-link">Home</a><div class="menu-group"><a href="practice.html" class="menu-link menu-parent">Practice <span class="menu-caret">⌄</span></a><div class="subnav" aria-label="Practice age groups"><span class="menu-subtitle">Early learners</span><a href="practice.html">All skills</a><a href="index.html?age=3">Age 3</a><a href="index.html?age=4">Age 4</a><a href="index.html?age=5">Age 5</a><a href="index.html?age=6">Age 6</a><span class="menu-subtitle">School classes</span><a href="index.html?level=class1">Class 1</a><a href="index.html?level=class2">Class 2</a><a href="index.html?level=class3">Class 3</a><a href="index.html?level=class4">Class 4</a><a href="index.html?level=class5">Class 5</a><a href="index.html?level=class6">Class 6</a><a href="index.html?level=class7">Class 7</a></div></div><a href="progress.html" class="menu-link active">Progress</a><a href="parents.html" class="menu-link">For grown-ups</a></nav>
+    <div class="profile-pill"><span>🌱</span> Explorer</div>
+  </header>
+
+  <main class="page-shell">
+    <section class="page-hero">
+      <span class="page-kicker">Explorer progress</span>
+      <h1>Every little step counts.</h1>
+      <p>Progress is about showing up, trying again, and finding one thing that feels easier today.</p>
+      <div class="sub-menu"><a href="#week">This week</a><a href="#skills">Skill garden</a><a href="#badges">Celebrations</a></div>
+    </section>
+
+    <section class="page-section" id="week">
+      <div class="page-section-heading"><div><span class="page-kicker">This week</span><h2>A gentle view of the journey</h2></div><p>Keep it playful</p></div>
+      <div class="metric-row"><div class="metric"><strong id="metricStreak">0</strong><span>day streak</span></div><div class="metric"><strong id="metricQuestions">0</strong><span>questions tried</span></div><div class="metric"><strong id="metricStars">0</strong><span>stars collected</span></div><div class="metric"><strong id="metricAccuracy">0%</strong><span>accuracy</span></div></div>
+    </section>
+
+    <section class="page-section" id="skills">
+      <div class="page-section-heading"><div><span class="page-kicker">Skill garden</span><h2>Growing confidence</h2></div><p>Across all practice</p></div>
+      <div class="dashboard-grid">
+        <article class="dashboard-card"><span class="library-icon">🌼</span><h3>Number sense</h3><p>Counting and comparing</p><div class="wide-progress"><span id="skillNumbers"></span></div></article>
+        <article class="dashboard-card"><span class="library-icon">🌱</span><h3>Addition</h3><p>Putting groups together</p><div class="wide-progress"><span id="skillAddition"></span></div></article>
+        <article class="dashboard-card"><span class="library-icon">🌻</span><h3>Equal groups</h3><p>Multiplication foundations</p><div class="wide-progress"><span id="skillMultiplication"></span></div></article>
+      </div>
+    </section>
+
+    <section class="page-section" id="badges">
+      <div class="page-section-heading"><div><span class="page-kicker">Celebrations</span><h2>Little wins to remember</h2></div></div>
+      <ul class="check-list"><li>First practice garden planted</li><li>Three days of trying and learning</li><li>Number sense explorer badge earned</li></ul>
+    </section>
+  </main>
+  <script src="site.js?v=1"></script>
+  <script src="progress.js?v=1"></script>
+</body>
+</html>

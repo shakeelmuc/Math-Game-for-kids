@@ -3,29 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Math Game for Muchale Family Kids</title>
-  <link rel="stylesheet" href="styles.css?v=8" />
+  <title>Muchale Number Garden</title>
+  <link rel="stylesheet" href="styles.css?v=9" />
 </head>
 <body>
   <div class="background"></div>
 
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Muchale Number Garden home"><span class="brand-mark">✦</span><span>Muchale Number Garden<small>Maths for curious minds</small></span></a>
+    <button class="menu-toggle" type="button" aria-label="Open menu">☰</button>
+    <nav class="main-menu" aria-label="Main menu">
+      <a href="index.html" class="menu-link">Home</a>
+      <div class="menu-group"><a href="practice.html" class="menu-link menu-parent active">Practice <span class="menu-caret">⌄</span></a><div class="subnav" aria-label="Practice age groups"><span class="menu-subtitle">Early learners</span><a href="practice.html">All skills</a><a href="index.html?age=3">Age 3</a><a href="index.html?age=4">Age 4</a><a href="index.html?age=5">Age 5</a><a href="index.html?age=6">Age 6</a><span class="menu-subtitle">School classes</span><a href="index.html?level=class1">Class 1</a><a href="index.html?level=class2">Class 2</a><a href="index.html?level=class3">Class 3</a><a href="index.html?level=class4">Class 4</a><a href="index.html?level=class5">Class 5</a><a href="index.html?level=class6">Class 6</a><a href="index.html?level=class7">Class 7</a></div></div>
+      <a href="progress.html" class="menu-link">Progress</a>
+      <a href="parents.html" class="menu-link">For grown-ups</a>
+    </nav>
+    <div class="profile-pill"><span>🌱</span> Explorer</div>
+  </header>
+
   <div class="game">
     <div class="header">
-      <h1>Math Game for Muchale Family Kids</h1>
-      <p>10 fun questions in each challenge!</p>
+      <div class="header-kicker"><span class="sun-icon" aria-hidden="true">☀</span> Muchale Number Garden</div>
+      <h1>Let's grow our maths skills!</h1>
+      <p>Pick an age, choose a game, and make numbers bloom.</p>
     </div>
 
     <div class="content">
+      <section class="learning-overview" aria-label="Learning progress">
+        <div class="overview-card streak-card"><span class="overview-icon">🔥</span><span><strong>3 days</strong><small>Practice streak</small></span></div>
+        <div class="overview-card progress-card"><span class="overview-icon">🌱</span><span><strong id="overallProgress">0%</strong><small>Path explored</small></span><div class="mini-progress"><span id="overallProgressBar"></span></div></div>
+        <div class="overview-card goal-card"><span class="overview-icon">🎯</span><span><strong>Today</strong><small>One little win</small></span></div>
+      </section>
+
+      <div class="garden-divider" aria-hidden="true"><span>●</span><span>●</span><span>●</span></div>
+
+      <section aria-labelledby="gameTitle">
+        <div class="section-heading game-heading">
+          <div>
+            <span class="eyebrow">Pick a game</span>
+            <h2 id="gameTitle">What shall we practise?</h2>
+          </div>
+          <span class="question-count" id="questionCount">8 questions</span>
+        </div>
       <div class="challenge-select" id="challengeSelect">
-        <button class="challenge-btn" data-type="addition">Addition</button>
-        <button class="challenge-btn" data-type="subtraction">Subtraction</button>
-        <button class="challenge-btn" data-type="mix">Mix Challenge</button>
+        <button class="challenge-btn addition-btn" data-type="addition" type="button"><span class="button-icon">＋</span><span>Addition<small>Put together</small></span></button>
+        <button class="challenge-btn subtraction-btn" data-type="subtraction" type="button"><span class="button-icon">−</span><span>Subtraction<small>Take away</small></span></button>
+        <button class="challenge-btn numbers-btn" data-type="numbers" type="button"><span class="button-icon">123</span><span>Number sense<small>Count & compare</small></span></button>
+          <button class="challenge-btn multiplication-btn" data-type="multiplication" data-min-age="5" type="button"><span class="button-icon">×</span><span>Groups<small>Multiply</small></span></button>
+          <button class="challenge-btn division-btn" data-type="division" data-min-age="5" type="button"><span class="button-icon">÷</span><span>Fair sharing<small>Divide evenly</small></span></button>
+          <button class="challenge-btn mix-btn" data-type="mix" type="button"><span class="button-icon">✦</span><span>Mixed maths<small>A little of everything</small></span></button>
       </div>
+      </section>
+
+      <section class="skill-path" aria-labelledby="pathTitle">
+        <div class="section-heading path-heading">
+          <div><span class="eyebrow">Skill path</span><h2 id="pathTitle">Keep growing</h2></div>
+          <span class="path-caption">Choose any flower to practise</span>
+        </div>
+        <div class="skill-grid">
+          <button class="skill-card skill-counting" data-type="numbers" type="button"><span class="skill-flower">🌼</span><span><strong>Number sense</strong><small>Count and compare</small></span><span class="skill-bar"><i style="width: 25%"></i></span></button>
+          <button class="skill-card skill-adding" data-type="addition" type="button"><span class="skill-flower">🌱</span><span><strong>Putting together</strong><small>Addition practice</small></span><span class="skill-bar"><i style="width: 25%"></i></span></button>
+          <button class="skill-card skill-taking" data-type="subtraction" type="button"><span class="skill-flower">🌷</span><span><strong>Taking away</strong><small>Subtraction practice</small></span><span class="skill-bar"><i style="width: 10%"></i></span></button>
+            <button class="skill-card skill-multiplying" data-type="multiplication" data-min-age="5" type="button"><span class="skill-flower">🌻</span><span><strong>Equal groups</strong><small>Multiplication practice</small></span><span class="skill-bar"><i style="width: 5%"></i></span></button>
+            <button class="skill-card skill-sharing" data-type="division" data-min-age="5" type="button"><span class="skill-flower">🍎</span><span><strong>Fair sharing</strong><small>Division practice</small></span><span class="skill-bar"><i style="width: 5%"></i></span></button>
+            <button class="skill-card skill-mix" data-type="mix" type="button"><span class="skill-flower">🌈</span><span><strong>Mixed maths</strong><small>A little of everything</small></span><span class="skill-bar"><i style="width: 5%"></i></span></button>
+        </div>
+      </section>
 
       <div class="question-box" id="questionBox">
         <div class="progress" id="progressText">Question 1 of 10</div>
         <div class="star-meter" id="starMeter" aria-live="polite">⭐ ⭐ ⭐ ⭐ ⭐</div>
-        <div class="question" id="questionText">4 + 3 = ?</div>
+        <div class="question" id="questionText">2 + 1 = ?</div>
+        <div class="question-hint" id="questionHint">Use your fingers or count the dots.</div>
 
         <div class="answer-row">
           <input class="answer-input" id="answerInput" type="number" inputmode="numeric" placeholder="?" />
@@ -46,11 +95,12 @@
         <p id="messageText">Nice work!</p>
         <p class="learning-tip" id="learningTip"></p>
         <div class="learning-examples" id="learningExamples" aria-live="polite"></div>
-        <button class="action-btn" id="restartBtn" style="margin-top: 10px;">Play Again</button>
+        <button class="action-btn" id="restartBtn" type="button" style="margin-top: 10px;">Play Again</button>
       </div>
     </div>
   </div>
 
-  <script src="script.js?v=5"></script>
+  <script src="site.js?v=1"></script>
+  <script src="script.js?v=7"></script>
 </body>
 </html>
