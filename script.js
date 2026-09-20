@@ -202,11 +202,17 @@ function generateQuestion(type, age) {
 
   if (type === 'patterns') {
     const step = randomInt(1, age < 5 ? 2 : age < 7 ? 4 : Math.min(10, age));
-    const start = randomInt(1, Math.max(1, Math.floor((max - step * 3) / 2)));
-    answer = start + step * 4;
+    const descending = randomInt(1, 2) === 2;
+    const start = descending
+      ? randomInt(step * 4 + 1, step * 4 + max)
+      : randomInt(1, Math.max(1, max - step * 3));
+    answer = descending ? start - step * 4 : start + step * 4;
     operator = 'pattern';
-    explanation = `The pattern adds ${step} each time, so the next number is ${answer}.`;
-    return { prompt: `${start}, ${start + step}, ${start + step * 2}, ${start + step * 3}, ?`, answer, num1: start, num2: step, operator, explanation };
+    explanation = `The pattern ${descending ? 'takes away' : 'adds'} ${step} each time, so the next number is ${answer}.`;
+    const sequence = descending
+      ? [start, start - step, start - step * 2, start - step * 3]
+      : [start, start + step, start + step * 2, start + step * 3];
+    return { prompt: `${sequence.join(', ')}, ?`, answer, num1: start, num2: step, operator, explanation };
   }
 
   if (type === 'doubles') {
@@ -280,7 +286,20 @@ function generateQuestion(type, age) {
 
 function generateChallenge(type, age) {
   const questions = [];
-  for (let i = 0; i < ageProfiles[age].questions; i++) {
+  const usedPrompts = new Set();
+  const target = ageProfiles[age].questions;
+  let attempts = 0;
+
+  while (questions.length < target && attempts < target * 30) {
+    const question = generateQuestion(type, age);
+    if (!usedPrompts.has(question.prompt)) {
+      usedPrompts.add(question.prompt);
+      questions.push(question);
+    }
+    attempts += 1;
+  }
+
+  while (questions.length < target) {
     questions.push(generateQuestion(type, age));
   }
   return questions;
