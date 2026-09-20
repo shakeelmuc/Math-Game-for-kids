@@ -462,7 +462,7 @@ function updateProgress() {
 }
 
 function saveAnswerProgress(wasCorrect) {
-  const storageKey = `muchaleLearningProgress:${window.muchaleProfileId || 'explorer'}`;
+  const storageKey = `muchaleLearningProgress:${window.muchaleProfileId || 'local'}`;
   const today = new Date().toISOString().slice(0, 10);
   const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
   let saved = { streak: 0, questions: 0, correct: 0, stars: 0, lastDate: '', skills: {} };

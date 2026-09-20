@@ -1,45 +1,13 @@
 const menuToggle = document.querySelector('.menu-toggle');
 const mainMenu = document.querySelector('.main-menu');
-const profileSelect = document.getElementById('profileSelect');
-const activeProfileKey = 'muchaleActiveProfile';
-let session = null;
-try {
-  session = JSON.parse(localStorage.getItem('muchaleSession') || 'null');
-} catch (error) {
-  localStorage.removeItem('muchaleSession');
-}
-const isLoginPage = window.location.pathname.endsWith('login.html');
-
-if (!session && !isLoginPage) window.location.replace('login.html');
-
-const activeProfile = session?.userId || localStorage.getItem(activeProfileKey) || 'explorer';
 const legacyProgressKey = 'muchaleLearningProgress';
-const explorerProgressKey = 'muchaleLearningProgress:explorer';
+const localProgressKey = 'muchaleLearningProgress:local';
 
-if (activeProfile === 'explorer' && !localStorage.getItem(explorerProgressKey) && localStorage.getItem(legacyProgressKey)) {
-  localStorage.setItem(explorerProgressKey, localStorage.getItem(legacyProgressKey));
+if (!localStorage.getItem(localProgressKey) && localStorage.getItem(legacyProgressKey)) {
+  localStorage.setItem(localProgressKey, localStorage.getItem(legacyProgressKey));
 }
 
-window.muchaleProfileId = activeProfile;
-
-if (profileSelect) {
-  profileSelect.replaceChildren();
-  const accountOption = document.createElement('option');
-  accountOption.value = 'account';
-  accountOption.textContent = session?.displayName || 'Account';
-  profileSelect.appendChild(accountOption);
-  const logoutOption = document.createElement('option');
-  logoutOption.value = 'logout';
-  logoutOption.textContent = 'Log out';
-  profileSelect.appendChild(logoutOption);
-  profileSelect.value = 'account';
-  profileSelect.addEventListener('change', () => {
-    if (profileSelect.value === 'logout') {
-      localStorage.removeItem('muchaleSession');
-      window.location.replace('login.html');
-    }
-  });
-}
+window.muchaleProfileId = 'local';
 
 
 if (menuToggle && mainMenu) {

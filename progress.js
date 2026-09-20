@@ -1,4 +1,4 @@
-const progressStorageKey = `muchaleLearningProgress:${window.muchaleProfileId || 'explorer'}`;
+const progressStorageKey = `muchaleLearningProgress:${window.muchaleProfileId || 'local'}`;
 
 function readProgress() {
   try {
@@ -12,9 +12,7 @@ const progress = readProgress();
 const questions = progress.questions || 0;
 const correct = progress.correct || 0;
 const skills = progress.skills || {};
-const profileName = document.querySelector('#profileSelect option:checked')?.textContent || 'Explorer';
-
-document.getElementById('profileProgressTitle').textContent = `${profileName} progress`;
+document.getElementById('profileProgressTitle').textContent = 'Local progress';
 
 document.getElementById('metricStreak').textContent = progress.streak || 0;
 document.getElementById('metricQuestions').textContent = questions;
