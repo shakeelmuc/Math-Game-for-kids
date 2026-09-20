@@ -41,6 +41,7 @@ body {
 .subnav a:hover { color: var(--text); background: #fff5d8; }
 .menu-group:hover .subnav, .menu-group:focus-within .subnav { display: block; }
 .profile-pill { display: flex; align-items: center; gap: 6px; padding: 9px 12px; border: 1px solid rgba(255,255,255,.8); border-radius: 999px; background: rgba(255,255,255,.55); color: var(--ink-soft); font-size: .76rem; font-weight: 800; }
+.profile-pill select { max-width: 92px; border: 0; outline: 0; background: transparent; color: var(--ink-soft); font: inherit; cursor: pointer; }
 .menu-toggle { display: none; border: 0; background: transparent; color: var(--text); font-size: 1.4rem; cursor: pointer; }
 
 .background {
@@ -516,7 +517,8 @@ body {
   .menu-link { width: 100%; }
   .menu-group { width: 100%; }
   .subnav { display: block; position: static; min-width: 0; max-height: none; overflow: visible; padding: 0 0 4px 14px; border: 0; border-radius: 0; box-shadow: none; background: transparent; }
-  .profile-pill { display: none; }
+  .profile-pill { display: flex; margin-left: auto; padding: 7px 9px; }
+  .profile-pill select { max-width: 78px; font-size: .7rem; }
   .page-shell { width: min(100% - 24px, 620px); }
   .page-hero { border-radius: 22px; }
   .library-grid, .dashboard-grid, .parent-grid { grid-template-columns: 1fr; }
