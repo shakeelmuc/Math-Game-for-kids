@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Game for Fatimah Zahra Muchale</title>
+  <link rel="stylesheet" href="styles.css?v=8" />
+</head>
+<body>
+  <div class="background"></div>
+
+  <div class="game">
+    <div class="header">
+      <h1>Math Game for Fatimah Zahra Muchale</h1>
+      <p>10 fun questions in each challenge!</p>
+    </div>
+
+    <div class="content">
+      <div class="challenge-select" id="challengeSelect">
+        <button class="challenge-btn" data-type="addition">Addition</button>
+        <button class="challenge-btn" data-type="subtraction">Subtraction</button>
+        <button class="challenge-btn" data-type="mix">Mix Challenge</button>
+      </div>
+
+      <div class="question-box" id="questionBox">
+        <div class="progress" id="progressText">Question 1 of 10</div>
+        <div class="question" id="questionText">4 + 3 = ?</div>
+
+        <div class="answer-row">
+          <input class="answer-input" id="answerInput" type="number" inputmode="numeric" placeholder="?" />
+          <button class="action-btn" id="submitBtn" type="button" onclick="checkAnswer()">Answer</button>
+          <button class="action-btn" id="nextBtn" type="button" onclick="goToNextQuestion()" hidden>Next</button>
+        </div>
+
+        <div class="feedback" id="feedbackText"></div>
+        <div class="mistake-animation" id="mistakeAnimation" aria-live="polite"></div>
+      </div>
+
+      <div class="summary" id="summaryBox">
+        <h2>Challenge Complete!</h2>
+        <div class="stars" id="stars">⭐ ⭐ ⭐</div>
+        <p id="scoreText">You got 0 out of 10 right.</p>
+        <p id="messageText">Nice work!</p>
+        <p class="learning-tip" id="learningTip"></p>
+        <div class="learning-examples" id="learningExamples" aria-live="polite"></div>
+        <button class="action-btn" id="restartBtn" style="margin-top: 10px;">Play Again</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js?v=5"></script>
+</body>
+</html>
