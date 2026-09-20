@@ -15,15 +15,63 @@ const learningExamples = document.getElementById('learningExamples');
 const stars = document.getElementById('stars');
 const restartBtn = document.getElementById('restartBtn');
 const background = document.querySelector('.background');
+const starMeter = document.getElementById('starMeter');
+const successPopup = document.getElementById('successPopup');
 
 let currentQuestions = [];
 let currentIndex = 0;
 let score = 0;
 let currentType = 'addition';
 let mistakes = [];
+let audioContext = null;
 
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function updateStarMeter() {
+  if (!starMeter) return;
+
+  const totalStars = 5;
+  const filled = Math.min(totalStars, Math.max(0, score));
+  const full = '⭐'.repeat(filled);
+  const empty = '☆'.repeat(totalStars - filled);
+  starMeter.textContent = `${full}${empty}`;
+  starMeter.classList.toggle('full', filled >= totalStars);
+}
+
+function showSuccessPopup() {
+  if (!successPopup) return;
+
+  const mood = score >= 5 ? 'Super Star! ⭐' : score >= 3 ? 'Amazing job! ✨' : 'Great job! ⭐';
+  successPopup.textContent = mood;
+  successPopup.classList.remove('show');
+  void successPopup.offsetWidth;
+  successPopup.classList.add('show');
+  setTimeout(() => successPopup.classList.remove('show'), 850);
+}
+
+function playCheerSound() {
+  const AudioCtor = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtor) return;
+
+  if (!audioContext) {
+    audioContext = new AudioCtor();
+  }
+
+  const oscillator = audioContext.createOscillator();
+  const gainNode = audioContext.createGain();
+  oscillator.type = 'triangle';
+  oscillator.frequency.setValueAtTime(660, audioContext.currentTime);
+  oscillator.frequency.exponentialRampToValueAtTime(990, audioContext.currentTime + 0.12);
+  gainNode.gain.setValueAtTime(0.0001, audioContext.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.12, audioContext.currentTime + 0.02);
+  gainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.35);
+
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+  oscillator.start();
+  oscillator.stop(audioContext.currentTime + 0.38);
 }
 
 function createBackgroundDecor() {
@@ -67,6 +115,30 @@ function createBurst(x, y) {
 
     setTimeout(() => piece.remove(), 1100);
   }
+}
+
+function createSuccessCelebration(x, y) {
+  const emojis = ['⭐', '✨', '🎉', '🌟', '🥳'];
+
+  for (let i = 0; i < 16; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'celebration-piece';
+    piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    piece.style.left = `${x}px`;
+    piece.style.top = `${y}px`;
+    piece.style.setProperty('--x', `${(Math.random() - 0.5) * 220}px`);
+    piece.style.setProperty('--y', `${-50 - Math.random() * 180}px`);
+    piece.style.setProperty('--rot', `${(Math.random() - 0.5) * 180}deg`);
+    piece.style.fontSize = `${18 + Math.random() * 20}px`;
+    document.body.appendChild(piece);
+
+    setTimeout(() => piece.remove(), 1200);
+  }
+
+  questionBox.classList.remove('celebrate');
+  void questionBox.offsetWidth;
+  questionBox.classList.add('celebrate');
+  setTimeout(() => questionBox.classList.remove('celebrate'), 500);
 }
 
 function generateQuestion(type) {
@@ -249,9 +321,23 @@ function checkAnswer() {
 
   if (userAnswer === currentQuestion.answer) {
     score += 1;
-    feedbackText.textContent = 'Yay! Correct!';
+    feedbackText.textContent = 'Yay! Correct! You did it!';
     feedbackText.className = 'feedback good';
-    createBurst(answerInput.getBoundingClientRect().left + 80, answerInput.getBoundingClientRect().top - 20);
+
+    updateStarMeter();
+    showSuccessPopup();
+    playCheerSound();
+
+    questionBox.classList.remove('success-glow');
+    void questionBox.offsetWidth;
+    questionBox.classList.add('success-glow');
+    setTimeout(() => questionBox.classList.remove('success-glow'), 700);
+
+    const rect = answerInput.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top - 10;
+    createBurst(x, y);
+    createSuccessCelebration(x, y);
   } else {
     if (currentQuestion.operator === '+') {
       feedbackText.textContent = `Let's learn: ${currentQuestion.num1} chocolates plus ${currentQuestion.num2} chocolates makes ${currentQuestion.answer}.`;
@@ -284,6 +370,7 @@ function startChallenge(type) {
   currentIndex = 0;
   score = 0;
   mistakes = [];
+  updateStarMeter();
   summaryBox.classList.remove('visible');
   questionBox.classList.add('visible');
   showQuestion();

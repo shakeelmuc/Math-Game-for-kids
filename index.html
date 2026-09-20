@@ -24,6 +24,7 @@
 
       <div class="question-box" id="questionBox">
         <div class="progress" id="progressText">Question 1 of 10</div>
+        <div class="star-meter" id="starMeter" aria-live="polite">⭐ ⭐ ⭐ ⭐ ⭐</div>
         <div class="question" id="questionText">4 + 3 = ?</div>
 
         <div class="answer-row">
@@ -31,6 +32,8 @@
           <button class="action-btn" id="submitBtn" type="button" onclick="checkAnswer()">Answer</button>
           <button class="action-btn" id="nextBtn" type="button" onclick="goToNextQuestion()" hidden>Next</button>
         </div>
+
+        <div class="success-popup" id="successPopup" aria-live="assertive">Great job! ⭐</div>
 
         <div class="feedback" id="feedbackText"></div>
         <div class="mistake-animation" id="mistakeAnimation" aria-live="polite"></div>
