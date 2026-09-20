@@ -212,7 +212,7 @@ body {
 }
 
 .addition-btn { background: var(--primary); }.subtraction-btn { background: var(--secondary); }.mix-btn { background: var(--success); }
-.numbers-btn { background: #4b8ed8; }.multiplication-btn { background: #ef7c77; }.division-btn { background: #6dba83; }
+.numbers-btn { background: #4b8ed8; }.patterns-btn { background: #7c78d8; }.doubles-btn { background: #e5a333; }.multiplication-btn { background: #ef7c77; }.division-btn { background: #6dba83; }.fractions-btn { background: #dd78a8; }.placevalue-btn { background: #588eaa; }.word-btn { background: #7c9b63; }
 .button-icon { font-size: 1.8rem; line-height: 1; }
 .challenge-btn.locked, .skill-card.locked { opacity: .45; filter: grayscale(.55); cursor: not-allowed; }
 .challenge-btn.locked:hover, .skill-card.locked:hover { transform: none; box-shadow: none; }

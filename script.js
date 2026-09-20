@@ -34,24 +34,24 @@ const requestedSkill = queryParams.get('skill');
 const requestedAge = Number(queryParams.get('age'));
 const classLevels = { class1: 7, class2: 8, class3: 9, class4: 10, class5: 11, class6: 12, class7: 13 };
 const requestedLevel = classLevels[queryParams.get('level')];
-const supportedSkills = ['addition', 'subtraction', 'numbers', 'multiplication', 'division', 'mix'];
+const supportedSkills = ['addition', 'subtraction', 'numbers', 'patterns', 'doubles', 'multiplication', 'division', 'fractions', 'placevalue', 'wordproblems', 'mix'];
 let currentType = supportedSkills.includes(requestedSkill) ? requestedSkill : 'addition';
 let currentAge = requestedLevel || ([3, 4, 5, 6].includes(requestedAge) ? requestedAge : 3);
 let mistakes = [];
 let audioContext = null;
 
 const ageProfiles = {
-  3: { max: 5, questions: 8, note: 'Tiny steps, big smiles', hint: 'Use your fingers or count the dots.', operations: ['numbers', 'addition', 'subtraction', 'mix'] },
-  4: { max: 10, questions: 10, note: 'Make numbers bloom', hint: 'Count carefully. You are doing great!', operations: ['numbers', 'addition', 'subtraction', 'mix'] },
-  5: { max: 15, questions: 10, note: 'Ready to explore', hint: 'Think it through, then pick your answer.', operations: ['numbers', 'addition', 'subtraction', 'multiplication', 'division', 'mix'] },
-  6: { max: 20, questions: 12, note: 'Maths champion mode', hint: 'You can solve this one step at a time.', operations: ['numbers', 'addition', 'subtraction', 'multiplication', 'division', 'mix'] },
-  7: { max: 50, factorMax: 5, questions: 12, note: 'Class 1 number builder', hint: 'Use a drawing or number line if it helps.', operations: ['numbers', 'addition', 'subtraction', 'multiplication', 'division', 'mix'] },
-  8: { max: 100, factorMax: 10, questions: 14, note: 'Class 2 problem solver', hint: 'Break the problem into friendly steps.', operations: ['numbers', 'addition', 'subtraction', 'multiplication', 'division', 'mix'] },
-  9: { max: 200, factorMax: 12, questions: 14, note: 'Class 3 maths explorer', hint: 'Look for a pattern before you calculate.', operations: ['numbers', 'addition', 'subtraction', 'multiplication', 'division', 'mix'] },
-  10: { max: 500, factorMax: 15, questions: 15, note: 'Class 4 strategy maker', hint: 'Choose the operation that fits the story.', operations: ['numbers', 'addition', 'subtraction', 'multiplication', 'division', 'mix'] },
-  11: { max: 1000, factorMax: 20, questions: 15, note: 'Class 5 confident thinker', hint: 'Estimate first, then solve carefully.', operations: ['numbers', 'addition', 'subtraction', 'multiplication', 'division', 'mix'] },
-  12: { max: 5000, factorMax: 25, questions: 16, note: 'Class 6 reasoning star', hint: 'Explain your strategy as you work.', operations: ['numbers', 'addition', 'subtraction', 'multiplication', 'division', 'mix'] },
-  13: { max: 10000, factorMax: 30, questions: 16, note: 'Class 7 maths leader', hint: 'Try more than one way and compare your methods.', operations: ['numbers', 'addition', 'subtraction', 'multiplication', 'division', 'mix'] }
+  3: { max: 5, questions: 8, note: 'Tiny steps, big smiles', hint: 'Use your fingers or count the dots.', operations: ['numbers', 'addition', 'subtraction', 'patterns', 'doubles', 'mix'] },
+  4: { max: 10, questions: 10, note: 'Make numbers bloom', hint: 'Count carefully. You are doing great!', operations: ['numbers', 'addition', 'subtraction', 'patterns', 'doubles', 'wordproblems', 'mix'] },
+  5: { max: 15, questions: 10, note: 'Ready to explore', hint: 'Think it through, then pick your answer.', operations: ['numbers', 'addition', 'subtraction', 'patterns', 'doubles', 'multiplication', 'division', 'fractions', 'wordproblems', 'mix'] },
+  6: { max: 20, questions: 12, note: 'Maths champion mode', hint: 'You can solve this one step at a time.', operations: ['numbers', 'addition', 'subtraction', 'patterns', 'doubles', 'multiplication', 'division', 'fractions', 'placevalue', 'wordproblems', 'mix'] },
+  7: { max: 50, factorMax: 5, questions: 12, note: 'Class 1 number builder', hint: 'Use a drawing or number line if it helps.', operations: ['numbers', 'addition', 'subtraction', 'patterns', 'doubles', 'multiplication', 'division', 'fractions', 'placevalue', 'wordproblems', 'mix'] },
+  8: { max: 100, factorMax: 10, questions: 14, note: 'Class 2 problem solver', hint: 'Break the problem into friendly steps.', operations: ['numbers', 'addition', 'subtraction', 'patterns', 'doubles', 'multiplication', 'division', 'fractions', 'placevalue', 'wordproblems', 'mix'] },
+  9: { max: 200, factorMax: 12, questions: 14, note: 'Class 3 maths explorer', hint: 'Look for a pattern before you calculate.', operations: ['numbers', 'addition', 'subtraction', 'patterns', 'doubles', 'multiplication', 'division', 'fractions', 'placevalue', 'wordproblems', 'mix'] },
+  10: { max: 500, factorMax: 15, questions: 15, note: 'Class 4 strategy maker', hint: 'Choose the operation that fits the story.', operations: ['numbers', 'addition', 'subtraction', 'patterns', 'doubles', 'multiplication', 'division', 'fractions', 'placevalue', 'wordproblems', 'mix'] },
+  11: { max: 1000, factorMax: 20, questions: 15, note: 'Class 5 confident thinker', hint: 'Estimate first, then solve carefully.', operations: ['numbers', 'addition', 'subtraction', 'patterns', 'doubles', 'multiplication', 'division', 'fractions', 'placevalue', 'wordproblems', 'mix'] },
+  12: { max: 5000, factorMax: 25, questions: 16, note: 'Class 6 reasoning star', hint: 'Explain your strategy as you work.', operations: ['numbers', 'addition', 'subtraction', 'patterns', 'doubles', 'multiplication', 'division', 'fractions', 'placevalue', 'wordproblems', 'mix'] },
+  13: { max: 10000, factorMax: 30, questions: 16, note: 'Class 7 maths leader', hint: 'Try more than one way and compare your methods.', operations: ['numbers', 'addition', 'subtraction', 'patterns', 'doubles', 'multiplication', 'division', 'fractions', 'placevalue', 'wordproblems', 'mix'] }
 };
 
 function randomInt(min, max) {
@@ -198,6 +198,53 @@ function generateQuestion(type, age) {
     operator = '×';
     explanation = `${groups} groups of ${each} make ${answer} altogether.`;
     return { prompt: `${groups} × ${each} = ?`, answer, num1: groups, num2: each, operator, explanation };
+  }
+
+  if (type === 'patterns') {
+    const step = randomInt(1, age < 5 ? 2 : age < 7 ? 4 : Math.min(10, age));
+    const start = randomInt(1, Math.max(1, Math.floor((max - step * 3) / 2)));
+    answer = start + step * 4;
+    operator = 'pattern';
+    explanation = `The pattern adds ${step} each time, so the next number is ${answer}.`;
+    return { prompt: `${start}, ${start + step}, ${start + step * 2}, ${start + step * 3}, ?`, answer, num1: start, num2: step, operator, explanation };
+  }
+
+  if (type === 'doubles') {
+    num1 = randomInt(1, Math.max(2, Math.floor(max / 2)));
+    answer = num1 * 2;
+    operator = 'double';
+    explanation = `Double means two equal groups: ${num1} + ${num1} = ${answer}.`;
+    return { prompt: `Double ${num1} = ?`, answer, num1, operator, explanation };
+  }
+
+  if (type === 'fractions') {
+    const denominator = randomInt(1, 2) === 1 ? 2 : 4;
+    const each = randomInt(1, Math.max(2, Math.floor(max / denominator)));
+    const whole = each * denominator;
+    answer = each;
+    operator = 'fraction';
+    explanation = `A ${denominator === 2 ? 'half' : 'quarter'} of ${whole} is ${answer}.`;
+    return { prompt: `What is 1/${denominator} of ${whole}?`, answer, num1: whole, num2: denominator, operator, explanation };
+  }
+
+  if (type === 'placevalue') {
+    const place = max >= 1000 ? 1000 : max >= 100 ? 100 : 10;
+    const digit = randomInt(1, 9);
+    const number = digit * place + randomInt(0, place - 1);
+    answer = digit * place;
+    operator = 'place';
+    explanation = `The ${digit} is in the ${place === 1000 ? 'thousands' : place === 100 ? 'hundreds' : 'tens'} place, so it is worth ${answer}.`;
+    return { prompt: `What is the value of the ${digit} in ${number}?`, answer, num1: number, num2: place, operator, explanation };
+  }
+
+  if (type === 'wordproblems') {
+    const first = randomInt(1, Math.max(2, Math.floor(max / 2)));
+    const second = randomInt(1, Math.max(2, Math.floor(max / 2)));
+    const adding = randomInt(1, 2) === 1;
+    answer = adding ? first + second : first;
+    operator = adding ? '+' : '-';
+    explanation = adding ? `There are ${first} red apples and ${second} green apples. Together that makes ${answer}.` : `There are ${first} balloons. ${second} float away, leaving ${answer}.`;
+    return { prompt: adding ? `${first} apples + ${second} apples = ?` : `${first} balloons - ${second} balloons = ?`, answer, num1: first, num2: second, operator, explanation };
   }
 
   if (type === 'division') {
